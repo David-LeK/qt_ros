@@ -26,7 +26,7 @@ cmake_minimum_required(VERSION 2.8.3)
 #get_filename_component(PACKAGE_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 #message("Creating Package: ${PACKAGE_NAME}")
 
-project(template_gui_package)  ## this package name is the name of the directory this cmake file is in
+project(qt_app)  ## this package name is the name of the directory this cmake file is in
 
 
 ################################
@@ -36,6 +36,9 @@ project(template_gui_package)  ## this package name is the name of the directory
 set(ROS_DEPENDS
   roscpp
   std_msgs
+  custom_msg
+  nav_msgs
+  geometry_msgs
   )
 
 set(EXTERNAL_DEPENDS
@@ -48,11 +51,20 @@ set(EXTERNAL_DEPENDS_LIB
   Qt5::Widgets
   Qt5::PrintSupport
   Qt5::Core
+  Qt5::Quick
+  Qt5::Location
+  Qt5::Positioning
+  Qt5::QuickWidgets
+  ${Python3_LIBRARIES}
+  ${NumPy_LIBRARIES}
+  ${GeographicLib_LIBRARIES}
   #${OpenCV_LIBS}
   )
 
 set(INCLUDE_DIRECTORIES
-  #${OpenCV_LIBS}
+  ${Python3_INCLUDE_DIRS}
+  ${NumPy_INCLUDE_DIRS}
+  ${GeographicLib_INCLUDE_DIRS}
   )
 
 
@@ -118,6 +130,17 @@ file(GLOB NODES
 ###
 set(CMAKE_AUTOMOC ON)  #This will autogenerate qt gui stuff
 set(CMAKE_AUTORCC ON)  #this needs to be on so cmake will know what to do with QT resource Files
+
+find_package(Qt5Quick 5.12.8 REQUIRED)
+find_package(Qt5Location 5.12.8 REQUIRED)
+find_package(Qt5Positioning 5.12.8 REQUIRED)
+find_package(Qt5QuickWidgets 5.12.8 REQUIRED)
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+find_package(Python3 COMPONENTS NumPy)
+include_directories(/usr/include/python3.8)
+find_package(GeographicLib REQUIRED)
+message("Python include directories: ${Python3_INCLUDE_DIRS}")
+message("Python libraries: ${Python3_LIBRARIES}")
 
 #find_package(Qt5Widgets)
 #find_package(Qt5PrintSupport)

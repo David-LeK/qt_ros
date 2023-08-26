@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qrc">
+        <file>mapnavigation.qml</file>
+        <file>vessel.png</file>
+    </qresource>
+</RCC>
