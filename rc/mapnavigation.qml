@@ -14,7 +14,7 @@ Item {
         name: "googlemaps"
         PluginParameter {
                         name:"googlemaps.maps.apikey"
-                        value:"[GOOLE_API_KEY]"
+                        value:"[GOOGLE_API_KEY]"
                     }
     }
 
